@@ -32,8 +32,6 @@ module Servant.Multipart
   , defaultTmpBackendOptions
   , Input(..)
   , FileData(..)
-  -- * servant-docs
-  , ToMultipartSample(..)
   ) where
 
 import Servant.Multipart.API
@@ -54,8 +52,6 @@ import Network.Wai
 import Network.Wai.Parse
 import Servant hiding (contentType)
 import Servant.API.Modifiers (FoldLenient)
-import Servant.Docs hiding (samples)
-import Servant.Foreign hiding (contentType)
 import Servant.Server.Internal
 import System.Directory
 
@@ -316,6 +312,12 @@ instance {-# OVERLAPPING #-}
 --         )
 --       ]
 -- @
+
+{- 
+ 
+--
+-- Commented  to remove depdendency on servant-docs and servant-foreign
+--
 class ToMultipartSample tag a where
   toMultipartSamples :: Proxy a -> [(Text, MultipartData tag)]
 
@@ -395,3 +397,6 @@ instance (HasForeignType lang ftype a, HasForeign lang ftype api)
           & reqBodyContentType .~ ReqBodyMultipart
     where
       t = typeFor lang ftype (Proxy @a)
+
+-}
+
